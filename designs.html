@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Örnek Tasarımlar - Asilkan Custom</title>
+    <meta name="description" content="Kişiye özel ceket tasarımlarımızı keşfedin. Geleneksel halı motifleriyle modern ceket tasarımları.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-gold': '#D4AF37',
+                        'custom-dark': '#1A1A1A',
+                        'custom-burgundy': '#8B1538',
+                        'custom-cream': '#F5F5DC'
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .navbar-scrolled {
+            background-color: rgba(26, 26, 26, 0.95) !important;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-overlay {
+            background: linear-gradient(45deg, rgba(26, 26, 26, 0.8), rgba(139, 21, 56, 0.6));
+            transition: all 0.4s ease;
+        }
+        
+        .image-overlay:hover {
+            background: linear-gradient(45deg, rgba(26, 26, 26, 0.6), rgba(139, 21, 56, 0.4));
+        }
+        
+        .pattern-bg-1 {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.8'%3E%3Cpath d='m30 30 10-10v20z'/%3E%3Cpath d='m30 30-10-10v20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .pattern-bg-2 {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B1538' fill-opacity='0.7'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h-2zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .pattern-bg-3 {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.6'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 1 1 0-30 15 15 0 0 1 0 30z' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .price-badge {
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-custom-cream font-body">
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-custom-dark navbar-scrolled">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-3xl font-display font-bold text-custom-gold">
+                        Asilkan <span class="text-white">Custom</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="index.html" class="text-white hover:text-custom-gold px-3 py-2 transition-all duration-300 font-medium">Ana Sayfa</a>
+                        <a href="#designs" class="text-custom-gold px-3 py-2 transition-all duration-300 font-medium">Örnek Tasarımlar</a>
+                        <a href="about.html" class="text-white hover:text-custom-gold px-3 py-2 transition-all duration-300 font-medium">Hakkımızda</a>
+                        <a href="index.html#contact" class="text-white hover:text-custom-gold px-3 py-2 transition-all duration-300 font-medium">İletişim</a>
+                        <a href="#" id="instagram-nav" class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white px-6 py-3 rounded-full font-semibold flex items-center space-x-2 hover:scale-105 transition-transform duration-300">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-custom-gold transition-colors duration-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden glass-effect">
+            <div class="px-4 pt-4 pb-6 space-y-3">
+                <a href="index.html" class="text-white hover:text-custom-gold block px-4 py-3 rounded-lg transition-colors duration-300">Ana Sayfa</a>
+                <a href="#designs" class="text-custom-gold block px-4 py-3 rounded-lg transition-colors duration-300">Örnek Tasarımlar</a>
+                <a href="about.html" class="text-white hover:text-custom-gold block px-4 py-3 rounded-lg transition-colors duration-300">Hakkımızda</a>
+                <a href="index.html#contact" class="text-white hover:text-custom-gold block px-4 py-3 rounded-lg transition-colors duration-300">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 bg-gradient-to-br from-custom-dark to-custom-burgundy">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div class="fade-in space-y-6">
+                <h1 class="text-5xl lg:text-6xl font-display font-bold text-white">Örnek Tasarımlar</h1>
+                <div class="w-32 h-1 bg-custom-gold mx-auto"></div>
+                <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+                    Her tasarımımız, seçtiğiniz halı desenine ve kumaş türüne göre kişiselleştirilebilir. 
+                    Fiyatlar, tercih ettiğiniz malzemeye göre belirlenir.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Design Gallery -->
+    <section id="designs" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Klasik Anadolu Koleksiyonu -->
+            <div class="mb-20">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-display font-bold text-custom-dark mb-4">Klasik Anadolu Koleksiyonu</h2>
+                    <div class="w-24 h-1 bg-custom-burgundy mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Yüzyıllık Anadolu halı motiflerinden esinlenen klasik tasarımlar</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Design 1 -->
+                    <div class="fade-in hover-lift bg-white rounded-3xl shadow-xl overflow-hidden">
+                        <div class="relative">
+                            <div class="aspect-[4/5] pattern-bg-1 relative overflow-hidden">
+                                <div class="absolute inset-0 image-overlay flex items-center justify-center">
+                                    <div class="text-center text-white space-y-4">
+                                        <i class="fas fa-tshirt text-6xl opacity-90 filter drop-shadow-lg"></i>
+                                        <div class="space-y-2">
+                                            <h4 class="font-bold text-xl">Antep Motifi</h4>
+                                            <p class="text-sm opacity-90">Geleneksel kırmızı tonlar</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Decorative elements -->
+                                <div class="absolute top-4 left-4 w-6 h-6 bg-custom-gold rounded-full opacity-60 animate-pulse"></div>
+                                <div class="absolute bottom-4 right-4 w-4 h-4 bg-white rounded-full opacity-40 animate-pulse" style="animation-delay: 1s;"></div>
+                            </div>
+                            <div class="absolute top-4 right-4">
+                                <span class="price-badge text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    Özel Fiyat
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-custom-dark mb-3">Klasik Antep Ceket</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Antep halılarının geleneksel kırmızı ve altın renk paletinden esinlenen, zamansız bir tasarım.</p>
+                            <div class="space-y-3 mb-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-palette text-custom-burgundy w-4"></i>
+                                    <span>Kırmızı, Altın, Bordo tonları</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-cut text-custom-burgundy w-4"></i>
+                                    <span>Klasik kesim, düğmeli tasarım</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-award text-custom-burgundy w-4"></i>
+                                    <span>Premium kalite garantisi</span>
+                                </div>
+                            </div>
+                            <button onclick="openDesignModal('antep')" class="w-full bg-custom-burgundy text-white py-4 rounded-xl font-semibold hover:bg-red-800 transition-colors duration-300 flex items-center justify-center space-x-2">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Design 2 -->
+                    <div class="fade-in hover-lift bg-white rounded-3xl shadow-xl overflow-hidden" style="animation-delay: 0.2s;">
+                        <div class="relative">
+                            <div class="aspect-[4/5] pattern-bg-2 relative overflow-hidden">
+                                <div class="absolute inset-0 image-overlay flex items-center justify-center">
+                                    <div class="text-center text-white space-y-4">
+                                        <i class="fas fa-tshirt text-6xl opacity-90 filter drop-shadow-lg"></i>
+                                        <div class="space-y-2">
+                                            <h4 class="font-bold text-xl">Konya Motifi</h4>
+                                            <p class="text-sm opacity-90">Mavi geometrik desenler</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-4 left-4 w-5 h-5 bg-blue-400 rounded-full opacity-50 animate-pulse"></div>
+                                <div class="absolute bottom-6 right-6 w-3 h-3 bg-custom-gold rounded-full opacity-70 animate-pulse" style="animation-delay: 0.5s;"></div>
+                            </div>
+                            <div class="absolute top-4 right-4">
+                                <span class="price-badge text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    Özel Fiyat
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-custom-dark mb-3">Modern Konya Ceket</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Konya halılarının geometrik desenlerini çağdaş bir yorumla sunan özel tasarım.</p>
+                            <div class="space-y-3 mb-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-palette text-blue-600 w-4"></i>
+                                    <span>Mavi, Lacivert, Beyaz tonları</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-cut text-blue-600 w-4"></i>
+                                    <span>Modern kesim, fermuarlı</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-award text-blue-600 w-4"></i>
+                                    <span>Özel kumaş teknolojisi</span>
+                                </div>
+                            </div>
+                            <button onclick="openDesignModal('konya')" class="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Design 3 -->
+                    <div class="fade-in hover-lift bg-white rounded-3xl shadow-xl overflow-hidden" style="animation-delay: 0.4s;">
+                        <div class="relative">
+                            <div class="aspect-[4/5] pattern-bg-3 relative overflow-hidden">
+                                <div class="absolute inset-0 image-overlay flex items-center justify-center">
+                                    <div class="text-center text-white space-y-4">
+                                        <i class="fas fa-tshirt text-6xl opacity-90 filter drop-shadow-lg"></i>
+                                        <div class="space-y-2">
+                                            <h4 class="font-bold text-xl">Isparta Motifi</h4>
+                                            <p class="text-sm opacity-90">Lüks altın işlemeler</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-4 left-4 w-4 h-4 bg-purple-400 rounded-full opacity-60 animate-pulse"></div>
+                                <div class="absolute bottom-4 right-4 w-6 h-6 bg-custom-gold rounded-full opacity-50 animate-pulse" style="animation-delay: 1.5s;"></div>
+                            </div>
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-purple-600 text-white text-sm font-bold px-4 py-2 rounded-full">
+                                    Lüks Serisi
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-display font-bold text-custom-dark mb-3">Lüks Isparta Ceket</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Isparta halılarının zarafetinden ilham alan, altın işlemeli premium tasarım.</p>
+                            <div class="space-y-3 mb-6 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-palette text-purple-600 w-4"></i>
+                                    <span>Mor, Altın, Krem tonları</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-cut text-purple-600 w-4"></i>
+                                    <span>Couture kesim, özel düğmeler</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-crown text-purple-600 w-4"></i>
+                                    <span>Altın işlemeli detaylar</span>
+                                </div>
+                            </div>
+                            <button onclick="openDesignModal('isparta')" class="w-full bg-purple-600 text-white py-4 rounded-xl font-semibold hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="fade-in text-center mb-12">
+                <h2 class="text-4xl font-display font-bold text-custom-dark mb-4">Fiyat Hesaplayıcı</h2>
+                <div class="w-24 h-1 bg-custom-gold mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600">Tercihlerinize göre tahmini fiyat hesaplayın</p>
+            </div>
+            
+            <div class="fade-in bg-white rounded-3xl shadow-xl p-8 lg:p-12">
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <div class="space-y-3">
+                        <label class="block text-lg font-semibold text-custom-dark">Halı Türü Seçin</label>
+                        <select id="carpet-type" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-custom-gold focus:border-transparent transition-all duration-300 text-lg">
+                            <option value="basic">Temel Halı Motifi (1500₺)</option>
+                            <option value="premium">Premium Halı Motifi (2500₺)</option>
+                            <option value="luxury">Lüks Halı Motifi (4000₺)</option>
+                            <option value="custom">Tamamen Özel Tasarım (5500₺)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="block text-lg font-semibold text-custom-dark">Kumaş Kalitesi</label>
+                        <select id="fabric-type" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-custom-gold focus:border-transparent transition-all duration-300 text-lg">
+                            <option value="cotton">Pamuk Karışımı (800₺)</option>
+                            <option value="wool">Premium Yün (1200₺)</option>
+                            <option value="silk">İpek Karışımı (1800₺)</option>
+                            <option value="cashmere">Kaşmir (2500₺)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="block text-lg font-semibold text-custom-dark">Ek Özellikler</label>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="golden-details" class="w-5 h-5 text-custom-gold rounded focus:ring-custom-gold">
+                                <span>Altın İşlemeli Detaylar (+750₺)</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="custom-buttons" class="w-5 h-5 text-custom-gold rounded focus:ring-custom-gold">
+                                <span>Özel Tasarım Düğmeler (+300₺)</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="express-delivery" class="w-5 h-5 text-custom-gold rounded focus:ring-custom-gold">
+                                <span>Hızlı Teslimat (+200₺)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="block text-lg font-semibold text-custom-dark">Beden</label>
+                        <select id="size" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-custom-gold focus:border-transparent transition-all duration-300 text-lg">
+                            <option value="xs">XS</option>
+                            <option value="s">S</option>
+                            <option value="m" selected>M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="xxl">XXL (+100₺)</option>
+                            <option value="custom">Özel Ölçü (+300₺)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="text-center space-y-6">
+                    <div class="bg-gradient-to-r from-custom-gold to-yellow-500 text-black rounded-2xl p-8">
+                        <div class="text-5xl font-display font-bold mb-2">
+                            <span id="total-price">2300₺</span>
+                        </div>
+                        <p class="text-lg opacity-90">Tahmini Toplam Fiyat</p>
+                        <p class="text-sm opacity-75 mt-2">* KDV ve kargo dahil, kesin fiyat için iletişime geçin</p>
+                    </div>
+                    
+                    <button class="bg-custom-dark text-white px-12 py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition-colors duration-300 flex items-center space-x-3 mx-auto">
+                        <i class="fab fa-instagram"></i>
+                        <span>Sipariş İçin İletişime Geç</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-custom-dark to-custom-burgundy">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+            <div class="fade-in space-y-8">
+                <h2 class="text-4xl lg:text-5xl font-display font-bold text-white">
+                    Özel Tasarımınızı Oluşturalım
+                </h2>
+                <div class="w-24 h-1 bg-custom-gold mx-auto"></div>
+                <p class="text-xl text-gray-200 leading-relaxed">
+                    Beğendiğiniz bir tasarım var mı? Instagram'dan bize ulaşın ve 
+                    size özel bir teklif hazırlayalım.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button id="instagram-btn" class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white px-10 py-4 rounded-full
+                                        <button id="instagram-btn" class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center space-x-3 mx-auto">
+                        <i class="fab fa-instagram text-2xl"></i>
+                        <span>Instagram'da Mesaj Gönder</span>
+                    </button>
+                    <button class="border-2 border-custom-gold text-custom-gold px-10 py-4 rounded-full font-bold text-lg hover:bg-custom-gold hover:text-black transition-all duration-300">
+                        Telefon ile Ara
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-custom-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-display font-bold text-custom-gold">Asilkan Custom</h3>
+                    <p class="text-gray-300 font-medium">Her Parça Bir Miras</p>
+                    <p class="text-gray-400 leading-relaxed">Geleneksel halı motiflerini modern tasarımlarla buluşturan özel ceket koleksiyonu</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold mb-6">Hızlı Linkler</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-custom-gold transition-colors duration-300 flex items-center space-x-2">
+                            <i class="fas fa-home w-4"></i><span>Ana Sayfa</span>
+                        </a></li>
+                        <li><a href="#designs" class="text-gray-300 hover:text-custom-gold transition-colors duration-300 flex items-center space-x-2">
+                            <i class="fas fa-tshirt w-4"></i><span>Tasarımlar</span>
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-custom-gold transition-colors duration-300 flex items-center space-x-2">
+                            <i class="fas fa-info-circle w-4"></i><span>Hakkımızda</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold mb-6">Koleksiyonlar</h4>
+                    <ul class="space-y-3">
+                        <li><span class="text-gray-300">Klasik Anadolu</span></li>
+                        <li><span class="text-gray-300">Modern Geometrik</span></li>
+                        <li><span class="text-gray-300">Lüks Serisi</span></li>
+                        <li><span class="text-gray-300">Özel Tasarım</span></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold mb-6">İletişim</h4>
+                    <a href="#" class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-full inline-flex items-center space-x-3 font-semibold hover:scale-105 transition-transform duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                        <span>@asilkancustom</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 Asilkan Custom. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Design Detail Modal -->
+    <div id="design-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl m-4 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 id="modal-title" class="text-3xl font-display font-bold text-custom-dark">Tasarım Detayları</h3>
+                    <button id="close-design-modal" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div id="modal-content" class="space-y-8">
+                    <!-- Modal content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instagram Modal -->
+    <div id="instagram-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 m-4 max-w-lg w-full transform scale-95 opacity-0 transition-all duration-300" id="modal-content-instagram">
+            <div class="text-center space-y-6">
+                <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 w-20 h-20 rounded-full mx-auto flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-display font-bold text-custom-dark">Instagram'a Yönlendiriliyorsunuz</h3>
+                    <p class="text-gray-600 leading-relaxed">Asilkan Custom Instagram sayfamızda daha fazla tasarım görebilir ve bizimle direkt iletişime geçebilirsiniz.</p>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button id="go-instagram" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 px-6 rounded-xl font-semibold">
+                        Instagram'a Git
+                    </button>
+                    <button id="close-modal" class="flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl font-semibold hover:bg-gray-300 transition-colors duration-300">
+                        İptal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fade in animation
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Price calculator
+        function updatePrice() {
+            const carpetType = document.getElementById('carpet-type').value;
+            const fabricType = document.getElementById('fabric-type').value;
+            const size = document.getElementById('size').value;
+            const goldenDetails = document.getElementById('golden-details').checked;
+            const customButtons = document.getElementById('custom-buttons').checked;
+            const expressDelivery = document.getElementById('express-delivery').checked;
+            
+            const carpetPrices = {
+                basic: 1500,
+                premium: 2500,
+                luxury: 4000,
+                custom: 5500
+            };
+            
+            const fabricPrices = {
+                cotton: 800,
+                wool: 1200,
+                silk: 1800,
+                cashmere: 2500
+            };
+            
+            const sizePrices = {
+                xs: 0, s: 0, m: 0, l: 0, xl: 0,
+                xxl: 100,
+                custom: 300
+            };
+            
+            let total = carpetPrices[carpetType] + fabricPrices[fabricType] + sizePrices[size];
+            
+            if (goldenDetails) total += 750;
+            if (customButtons) total += 300;
+            if (expressDelivery) total += 200;
+            
+            document.getElementById('total-price').textContent = total + '₺';
+        }
+
+        // Event listeners for price calculator
+        document.getElementById('carpet-type').addEventListener('change', updatePrice);
+        document.getElementById('fabric-type').addEventListener('change', updatePrice);
+        document.getElementById('size').addEventListener('change', updatePrice);
+        document.getElementById('golden-details').addEventListener('change', updatePrice);
+        document.getElementById('custom-buttons').addEventListener('change', updatePrice);
+        document.getElementById('express-delivery').addEventListener('change', updatePrice);
+
+        // Design modal functionality
+        function openDesignModal(designType) {
+            const designs = {
+                antep: {
+                    title: 'Klasik Antep Ceket',
+                    description: 'Antep halılarının zengin kültürel mirasından esinlenen bu tasarım, geleneksel kırmızı ve altın renk paletini modern bir yaklaşımla yorumlar.',
+                    features: [
+                        'Otantik Antep halı motiflerinden esinlenme',
+                        'El işçiliği ile işlenmiş detaylar',
+                        'Premium kalite kumaş seçenekleri',
+                        'Klasik kesim ve zamansız tasarım',
+                        'Özel ambalaj ve sertifika dahil'
+                    ],
+                    materials: ['Premium Pamuk', 'Yün Karışımı', 'İpek Karışımı'],
+                    colors: ['Antep Kırmızısı', 'Altın Sarısı', 'Bordo', 'Krem'],
+                    occasions: ['Özel Davetler', 'İş Toplantıları', 'Kültürel Etkinlikler'],
+                    care: ['Kuru temizleme önerilir', 'Ütü sıcaklığı orta', 'Asarak muhafaza edin']
+                },
+                konya: {
+                    title: 'Modern Konya Ceket',
+                    description: 'Konya halılarının geometrik desenlerini çağdaş bir perspektifle yeniden yorumlayan, mavi tonlarında özel bir tasarım.',
+                    features: [
+                        'Konya halılarının geometrik motiflerini modern yorumlama',
+                        'Çağdaş kesim teknikleri',
+                        'Nefes alabilen yenilikçi kumaş',
+                        'Fermuarlı pratik tasarım',
+                        'Su geçirmez özel işlem'
+                    ],
+                    materials: ['Teknik Kumaş', 'Mikrofiber', 'Organik Pamuk'],
+                    colors: ['Konya Mavisi', 'Lacivert', 'Beyaz', 'Gri'],
+                    occasions: ['Günlük Kullanım', 'Spor Etkinlikleri', 'Rahat Buluşmalar'],
+                    care: ['30°C\'de yıkanabilir', 'Düşük ısıda ütülenebilir', 'Çabuk kuruyan özellik']
+                },
+                isparta: {
+                    title: 'Lüks Isparta Ceket',
+                    description: 'Isparta halılarının naif güzelliğinden ilham alan, altın işlemeli detaylarla bezeli lüks bir tasarım.',
+                    features: [
+                        'Isparta halılarının zarif motiflerinden ilham',
+                        'El işçiliği altın işlemeli detaylar',
+                        'Couture kalitesinde kesim ve dikim',
+                        'Özel tasarım düğmeler ve aksesuarlar',
+                        'Sınırlı üretim özel koleksiyon'
+                    ],
+                    materials: ['Kaşmir', 'İpek', 'Premium Yün'],
+                    colors: ['İsparta Moru', 'Altın', 'Krem', 'Pembe'],
+                    occasions: ['Düğün', 'Gala', 'Özel Kutlamalar', 'VIP Etkinlikler'],
+                    care: ['Sadece profesyonel temizlik', 'Özel muhafaza çantası', 'Yıllık bakım servisi']
+                }
+            };
+
+            const design = designs[designType];
+            document.getElementById('modal-title').textContent = design.title;
+            
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="aspect-[4/5] bg-gradient-to-br from-gray-800 to-gray-600 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fas fa-tshirt text-8xl text-white opacity-80"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-bold text-custom-dark mb-3">Tasarım Hikayesi</h4>
+                            <p class="text-gray-600 leading-relaxed">${design.description}</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-bold text-custom-dark mb-3">Öne Çıkan Özellikler</h4>
+                            <ul class="space-y-2">
+                                ${design.features.map(feature => `<li class="flex items-start space-x-2"><i class="fas fa-check text-custom-gold mt-1 flex-shrink-0"></i><span class="text-gray-600">${feature}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h5 class="font-bold text-custom-dark mb-3 flex items-center">
+                            <i class="fas fa-palette text-custom-gold mr-2"></i>
+                            Kumaş Seçenekleri
+                        </h5>
+                        <ul class="space-y-1 text-sm text-gray-600">
+                            ${design.materials.map(material => `<li>• ${material}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h5 class="font-bold text-custom-dark mb-3 flex items-center">
+                            <i class="fas fa-swatchbook text-custom-gold mr-2"></i>
+                            Renk Seçenekleri
+                        </h5>
+                        <ul class="space-y-1 text-sm text-gray-600">
+                            ${design.colors.map(color => `<li>• ${color}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h5 class="font-bold text-custom-dark mb-3 flex items-center">
+                            <i class="fas fa-calendar text-custom-gold mr-2"></i>
+                            Kullanım Alanları
+                        </h5>
+                        <ul class="space-y-1 text-sm text-gray-600">
+                            ${design.occasions.map(occasion => `<li>• ${occasion}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h5 class="font-bold text-custom-dark mb-3 flex items-center">
+                            <i class="fas fa-heart text-custom-gold mr-2"></i>
+                            Bakım Önerileri
+                        </h5>
+                        <ul class="space-y-1 text-sm text-gray-600">
+                            ${design.care.map(care => `<li>• ${care}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-custom-gold to-yellow-500 p-6 rounded-2xl text-center mt-8">
+                    <h4 class="text-xl font-bold text-black mb-3">Özel Tasarım Siparişi</h4>
+                    <p class="text-black opacity-80 mb-4">Bu tasarımı kendi ölçülerinize göre özelleştirmek için bizimle iletişime geçin.</p>
+                    <button onclick="closeDesignModal(); openInstagramModal();" class="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-300">
+                        <i class="fab fa-instagram mr-2"></i>
+                        Instagram'dan Sipariş Ver
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('design-modal').classList.remove('hidden');
+            document.getElementById('design-modal').classList.add('flex');
+        }
+
+        function closeDesignModal() {
+            document.getElementById('design-modal').classList.add('hidden');
+            document.getElementById('design-modal').classList.remove('flex');
+        }
+
+        document.getElementById('close-design-modal').addEventListener('click', closeDesignModal);
+
+        // Instagram modal functionality
+        const instagramBtns = document.querySelectorAll('#instagram-btn, #instagram-nav');
+        const instagramModal = document.getElementById('instagram-modal');
+        const modalContentInstagram = document.getElementById('modal-content-instagram');
+        const closeModalBtn = document.getElementById('close-modal');
+        const goInstagramBtn = document.getElementById('go-instagram');
+
+        function openInstagramModal() {
+            instagramModal.classList.remove('hidden');
+            instagramModal.classList.add('flex');
+            setTimeout(() => {
+                modalContentInstagram.classList.remove('scale-95', 'opacity-0');
+                modalContentInstagram.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeInstagramModal() {
+            modalContentInstagram.classList.add('scale-95', 'opacity-0');
+            modalContentInstagram.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                instagramModal.classList.add('hidden');
+                instagramModal.classList.remove('flex');
+            }, 300);
+        }
+
+        instagramBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openInstagramModal();
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeInstagramModal);
+
+        goInstagramBtn.addEventListener('click', function() {
+            window.open('https://instagram.com/asilkancustom', '_blank');
+            closeInstagramModal();
+        });
+
+        // Close modals when clicking outside
+        instagramModal.addEventListener('click', function(e) {
+            if (e.target === instagramModal) {
+                closeInstagramModal();
+            }
+        });
+
+        document.getElementById('design-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDesignModal();
+            }
+        });
+
+        // Initialize price calculator
+        updatePrice();
+    </script>
+</body>
+</html>
